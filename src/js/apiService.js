@@ -26,12 +26,17 @@ function createListMarkup(data) {
     createList();
     createListItems(data);
     createBtn();
+    createBtnUp();
 
     scrolling();
 
     return;
-  }
+  }  else if (refs.input.value === '') {
+  page === 1;
+  const gallery = document.querySelector('.gallery');
+  gallery.innerHTML = '';
 
+}
   createListItems(data);
   scrolling();
 
@@ -76,8 +81,14 @@ function createBtn() {
 
   loadMoreBtn.addEventListener('click', searchImages);
 }
+//создает кнопку "подняться вверх"
 
-function cleaner() {
-  refs.input.value = '';
-  return;
-}
+function createBtnUp (){
+   const upBtn = document.createElement('a');
+  upBtn.textContent = 'Up';
+  upBtn.classList.add('upBtn');
+  upBtn.href = '#submit';
+
+  refs.container.insertAdjacentElement('beforeend', upBtn);
+  
+};
