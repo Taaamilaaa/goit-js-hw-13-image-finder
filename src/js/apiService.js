@@ -4,8 +4,6 @@ import markup from '../templates/markup.hbs';
 const BASE_URL = 'https://pixabay.com/api/';
 const KEY = '23114127-913a50287ab6c0ea340feb686';
 
-
-
 let page = 1;
 let searchValue = '';
 
@@ -23,7 +21,6 @@ export default function searchImages(evt) {
 
 refs.input.addEventListener('input', cleanInput);
 
-
 let btn = null;
 
 function createListMarkup(data) {
@@ -36,22 +33,21 @@ function createListMarkup(data) {
     scrolling();
 
     return;
-  };
+  }
   createListItems(data);
   scrolling();
 
   return;
 }
 
-
 function cleanInput() {
-   if (refs.input.value === '') {
-  page = 1;
-  const gallery = document.querySelector('.gallery');
-     gallery.innerHTML = '';
-     btn.remove()
+  if (refs.input.value === '') {
+    page = 1;
+    const gallery = document.querySelector('.gallery');
+    gallery.innerHTML = '';
+    btn.remove();
     return;
-}
+  }
 }
 //скролит до кнопки
 function scrolling() {
@@ -71,7 +67,7 @@ function createList() {
 
 //создает разметку галлереи
 function createListItems(data) {
-//   refs.submitBtn.disabled = true;
+  //   refs.submitBtn.disabled = true;
 
   const { hits } = data;
   const markupEl = markup(hits);
@@ -93,12 +89,11 @@ function createBtn() {
 }
 //создает кнопку "подняться вверх"
 
-function createBtnUp (){
-   const upBtn = document.createElement('a');
+function createBtnUp() {
+  const upBtn = document.createElement('a');
   upBtn.textContent = 'Up';
   upBtn.classList.add('upBtn');
   upBtn.href = '#submit';
 
   refs.container.insertAdjacentElement('beforeend', upBtn);
-  
-};
+}
