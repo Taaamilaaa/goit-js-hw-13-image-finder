@@ -7,7 +7,7 @@ const refs = {
   input: document.querySelector('input'),
   form: document.querySelector('#search-form'),
   container: document.querySelector('.container'),
-  submitBtn: document.querySelector('#submit')
+  submitBtn: document.querySelector('#submit'),
 };
 
 let page = 1;
@@ -22,40 +22,39 @@ function searchImagesOnBtnClick(evt) {
 
   const searchValue = refs.input.value;
 
-    searchImages(searchValue.trim(), page).then(result => {
-        if (result.hits.length === 0) {
+  searchImages(searchValue.trim(), page).then(result => {
+    if (result.hits.length === 0) {
       error({
-          title: 'OOPS :-(',
-          text: 'Wrong request! Try again!'
+        title: 'OOPS :-(',
+        text: 'Wrong request! Try again!',
       });
     } else if (evt.target.className === 'search-form') {
-    notice({
+      notice({
         title: 'Great !!!',
         text: ` There are ${result.total} results`,
       });
-    page = 1;
-    return searchImages(searchValue.trim(), page)
-      .then(data => createList(data))
-      .then(i => scrolling(i))
-      .catch(error => console.log(error));
-  } else if (evt.target.className === 'loadMoreBtn button') {
-    page += 1;
-    return searchImages(searchValue.trim(), page)
-      .then(data => createListItems(data))
-      .then(i => scrolling(i))
-      .catch(error => console.log(error));
-  }
-    
+      page = 1;
+      return searchImages(searchValue.trim(), page)
+        .then(data => createList(data))
+        .then(i => scrolling(i))
+        .catch(error => console.log(error));
+    } else if (evt.target.className === 'loadMoreBtn button') {
+      page += 1;
+      return searchImages(searchValue.trim(), page)
+        .then(data => createListItems(data))
+        .then(i => scrolling(i))
+        .catch(error => console.log(error));
+    }
+
     return;
   });
 
   return;
-};
-
+}
 
 //создает ul и li
 function createList(data) {
-    refs.submitBtn.disabled = ('disabled');
+  refs.submitBtn.disabled = 'disabled';
   const list = document.createElement('ul');
   list.classList.add('gallery');
   refs.container.insertAdjacentElement('beforeend', list);
@@ -100,17 +99,19 @@ function scrolling() {
 }
 // очищает разметку галлереи
 function cleanInput() {
-        refs.submitBtn.disabled = false;
+  const list = document.querySelector('ul');
+  btn = document.querySelector('.loadMoreBtn');
+  upBtn = document.querySelector('.upBtn');
 
   if (refs.input.value === '') {
     page = 1;
     if (document.querySelector('.gallery')) {
-      btn = document.querySelector('.loadMoreBtn');
       btn.remove();
-      upBtn = document.querySelector('.upBtn');
+
       upBtn.remove();
       const list = document.querySelector('ul');
       list.remove();
+      refs.submitBtn.disabled = false;
       return;
     }
   }
