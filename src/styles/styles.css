@@ -55,6 +55,10 @@ input:focus {
   -moz-box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
   box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2 60, 80, 0.2);
 }
+.button:disabled {
+  color: #eeeedd8a;
+  background-color: #abaa788c;
+}
 .search-form {
   text-align: center;
 }
