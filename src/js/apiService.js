@@ -18,8 +18,7 @@ export default function searchImages(evt) {
   )
     .then(response => response.json())
     .then(i => createListMarkup(i))
-    .then(() => page++)
-    .catch(error=>error({text: 'Oh, no!!!'}));
+    .then(() => page++);
 }
 
 let btn = null;
