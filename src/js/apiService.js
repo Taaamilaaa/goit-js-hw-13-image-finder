@@ -6,7 +6,6 @@ const KEY = '23114127-913a50287ab6c0ea340feb686';
 
 refs.input.addEventListener('input', cleanInput);
 
-
 let page = 1;
 let searchValue = '';
 
@@ -19,9 +18,9 @@ export default function searchImages(evt) {
   )
     .then(response => response.json())
     .then(i => createListMarkup(i))
-    .then(() => page++);
+    .then(() => page++)
+    .catch(error=>error({text: 'Oh, no!!!'}));
 }
-
 
 let btn = null;
 let upBtn = null;
@@ -39,19 +38,19 @@ function createListMarkup(data) {
   scrolling();
 
   return;
-};
+}
 
 function cleanInput() {
   if (refs.input.value === '') {
     page = 1;
-    const gallery = document.querySelector('.gallery');
-    gallery.innerHTML = '';
     btn.remove();
     upBtn = document.querySelector('.upBtn');
     upBtn.remove();
+    const list = document.querySelector('ul');
+    list.remove();
     return;
   }
-};
+}
 
 //скролит до кнопки
 function scrolling() {
@@ -60,7 +59,7 @@ function scrolling() {
     behavior: 'smooth',
     block: 'end',
   });
-};
+}
 
 //создает ul
 function createList() {
@@ -68,17 +67,16 @@ function createList() {
   list.classList.add('gallery');
   refs.container.insertAdjacentElement('beforeend', list);
   return;
-};
+}
 
 //создает разметку галлереи
-function createListItems(data) { 
-
+function createListItems(data) {
   const { hits } = data;
   const markupEl = markup(hits);
 
   const list = document.querySelector('.gallery');
   list.insertAdjacentHTML('beforeend', markupEl);
-};
+}
 
 //создает кнопки ""загрузить больше" и "вверх""
 function createBtn() {
@@ -96,5 +94,4 @@ function createBtn() {
   upBtn.href = '#submit';
 
   refs.container.insertAdjacentElement('beforeend', upBtn);
-
-};
+}
