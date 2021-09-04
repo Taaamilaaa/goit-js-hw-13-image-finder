@@ -36,7 +36,6 @@ function searchImagesOnBtnClick(evt) {
       page = 1;
       return searchImages(searchValue.trim(), page)
         .then(data => createList(data))
-        .then(i => scrolling(i))
         .catch(error => console.log(error));
     } else if (evt.target.className === 'loadMoreBtn button') {
       page += 1;
